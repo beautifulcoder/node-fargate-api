@@ -41,9 +41,7 @@ export class NodeFargateApiStack extends cdk.Stack {
       publicLoadBalancer: true
     });
 
-    service.targetGroup.configureHealthCheck({
-      path: '/health'
-    });
+    service.targetGroup.configureHealthCheck({ path: '/health' });
 
     const table = new dynamodb.Table(this, 'table', {
       tableName: 'pizzas',

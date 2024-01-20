@@ -8,6 +8,6 @@ COPY app/* ./
 RUN npm ci --omit=dev && npm run build
 COPY . .
 
-ENV PORT 80
+ENV ADDRESS=0.0.0.0 PORT=80
 
 CMD ["node", "app/api.js"]

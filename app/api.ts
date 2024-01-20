@@ -60,9 +60,11 @@ fastify.get('/health', async (request, reply) => {
   await reply.status(200).send();
 });
 
+const { ADDRESS = 'localhost', PORT = 3000 } = process.env;
+
 const start = async (): Promise<void> => {
   try {
-    await fastify.listen({ port: Number(process.env.PORT) || 3000 });
+    await fastify.listen({ port: Number(PORT), host: ADDRESS });
   } catch (err) {
     fastify.log.error(err);
     process.exit(1);
