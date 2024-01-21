@@ -41,7 +41,12 @@ export class NodeFargateApiStack extends cdk.Stack {
       publicLoadBalancer: true
     });
 
-    service.service.autoScaleTaskCount({ maxCapacity: 5 });
+    const taskCount = service.service.autoScaleTaskCount({ maxCapacity: 5 });
+    taskCount.scaleOnCpuUtilization('cpu-scaling', {
+      targetUtilizationPercent: 45,
+      scaleInCooldown: cdk.Duration.seconds(60),
+      scaleOutCooldown: cdk.Duration.seconds(60)
+    });
 
     service.targetGroup.configureHealthCheck({ path: '/health' });
 
