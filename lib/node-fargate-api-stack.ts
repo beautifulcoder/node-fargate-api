@@ -13,7 +13,7 @@ export class NodeFargateApiStack extends cdk.Stack {
     super(scope, id, props);
 
     const vpc = ec2.Vpc.fromLookup(this, 'vpc', {
-      vpcId: 'vpc-0b4709032ac69c809'
+      vpcId: 'vpc-1234567890'
     });
 
     const cluster = new ecs.Cluster(this, 'cluster', {
