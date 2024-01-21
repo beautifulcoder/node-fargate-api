@@ -41,6 +41,8 @@ export class NodeFargateApiStack extends cdk.Stack {
       publicLoadBalancer: true
     });
 
+    service.service.autoScaleTaskCount({ maxCapacity: 5 });
+
     service.targetGroup.configureHealthCheck({ path: '/health' });
 
     const table = new dynamodb.Table(this, 'table', {
