@@ -8,8 +8,8 @@ import { unmarshall } from '@aws-sdk/util-dynamodb';
 
 const client = new DynamoDBClient();
 
-const fastify = Fastify({
-  logger: true
+export const fastify = Fastify({
+  logger: false
 });
 
 fastify.get('/pizzas/:id', async (request, reply) => {
@@ -71,4 +71,6 @@ const start = async (): Promise<void> => {
   }
 };
 
-void start();
+if (process.env.JEST_WORKER_ID === undefined) {
+  void start();
+}
